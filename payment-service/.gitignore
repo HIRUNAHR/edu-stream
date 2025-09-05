@@ -6,7 +6,8 @@
 __pycache__/
 
 # environment
-.env
+*.env
+*.env
 .env.local
 .env.*.local
 
