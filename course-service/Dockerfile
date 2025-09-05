@@ -1,20 +1,28 @@
 FROM node:18-alpine AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci 
 
+# install dependencies
+COPY package*.json ./
+RUN npm ci
+
+# build source
 COPY tsconfig.json ./
 COPY src ./src
 COPY scripts ./scripts
 RUN npm run build
 
+# ---- runtime ----
 FROM node:18-alpine
 WORKDIR /app
-COPY --from=builder /app/node_modules ./node_modules
+
+# only production deps
+COPY package*.json ./
+RUN npm ci --omit=dev
+
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/scripts ./scripts
-COPY package*.json ./
+
+USER node
 
 EXPOSE 3002
-USER node
-CMD ["npm", "start"]
+CMD ["node", "dist/index.js"]
