@@ -4,6 +4,8 @@ import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
 import Stripe from 'stripe';
+import dotenv from 'dotenv';
+dotenv.config();
 import paymentRoutes from './routes/payments';
 import subscriptionRoutes from './routes/subscriptions';
 import webhookRoutes from './routes/webhooks';

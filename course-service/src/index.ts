@@ -4,6 +4,8 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+dotenv.config();
 import courseRoutes from './routes/courses';
 import categoryRoutes from './routes/categories';
 import enrollmentsRoutes from './routes/enrollments';
